@@ -19,7 +19,7 @@ const books = [
         }}
       >
         {book.title} <br/>
-        <label for="file">70%</label>
+        <label for="file"><small>70%</small></label>
         <progress id="file" max="100" value="70"> 70% </progress>
       </li>
     );
