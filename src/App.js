@@ -4,9 +4,6 @@ import BookList from "./components/BookList";
 import BookDetails from "./components/BookDetails";
 
 function App() {
-  function handleClick() {
-
-  }
 
   return (
     <>
@@ -14,16 +11,12 @@ function App() {
         <Routes>
           <Route path="/" element={<BookList />} />
 
-
-
           <Route
             path="/books/:slug"
             element={<BookDetails />}
           />
         </Routes>
       
-
-      {/* <BookList onClick={handleClick} /> */}
     </>
   );
 }
