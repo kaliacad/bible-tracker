@@ -3,7 +3,7 @@ import { books } from '../data/books';
 
 export default function BookList() {
 
-  const listItems = books.map((book, index) =>
+  const listItems = books.map((book) =>
     <Link to={`/books/${book.id}`}>
       <li
         key={book.id}
