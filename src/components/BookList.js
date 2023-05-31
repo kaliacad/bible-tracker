@@ -6,7 +6,7 @@ export default function BookList() {
   const listItems = books.map((book) =>
     <Link to={`/books/${book.id}`}>
       <li
-        key={book.id}
+        key={book.id.toString()}
         style={{
           listStyleType: 'none',
           borderRadius: '5px',
