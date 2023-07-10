@@ -16,9 +16,7 @@ export default function BookList() {
           cursor: 'pointer'
         }}
       >
-        {book.title} <br />
-        <label for="file"><small>70%</small></label>
-        <progress id="file" max="100" value="70"> 70% </progress>
+        {book.title} 
       </li>
     </Link>
   );

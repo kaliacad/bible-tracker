@@ -6,9 +6,9 @@ export default function BookDetails() {
   const { slug } = useParams()
   const book = books.find(item => item.id == slug)
   const chapters = Array.from({ length: book.chapter }, (value, idx) => idx + 1)
+  const localStorageKey = book.title
 
-  const [selecteds, setSelecteds] = useState([])
-
+  const [selecteds, setSelecteds] = useState(localStorage.hasOwnProperty(localStorageKey) ? JSON.parse(localStorage.getItem(localStorageKey)) : [])
   const COLORS = {
     selected: 'rgb(254 245 231)',
   }
@@ -18,10 +18,13 @@ export default function BookDetails() {
     if (selecteds.includes(chap)) {
       const myChaps = selecteds.filter(el => el !== chap)
       setSelecteds(myChaps)
-
+      localStorage.setItem(localStorageKey, JSON.stringify(myChaps))
     }
 
-    else setSelecteds(prev => [...prev, chap])
+    else {
+      setSelecteds(prev => [...prev, chap])
+      localStorage.setItem(localStorageKey, JSON.stringify([...selecteds, chap]))
+    }
 
   }
 
@@ -49,8 +52,8 @@ export default function BookDetails() {
                   backgroundColor: selecteds.includes(chap) ? COLORS.selected : '',
                   cursor: 'pointer'
                 }}
-                onClick={() => handleClick(chap)}
-                key={(idx + 1).toString()}
+                onClick={ () => handleClick(chap) }
+                key={( idx + 1).toString() }
               >
                 {chap}
               </div>)
