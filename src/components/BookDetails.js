@@ -1,6 +1,7 @@
 import { Link, useParams } from "react-router-dom";
 import { useState } from "react";
 import { books } from "../data/books";
+import ProgressBar from './ProgressBar/ProgressBar';
 
 export default function BookDetails() {
   const { slug } = useParams()
@@ -27,11 +28,14 @@ export default function BookDetails() {
     }
 
   }
-
+    const progressionLecture = Math.round((selecteds.length / book.chapter) * 100);
   return (
     <>
       <Link to="/">Retour</Link>
       <h2>{book.title}</h2>
+      <div className="container-progress">     
+      <ProgressBar percentage={progressionLecture} className="my-custom-class" />
+      </div>
       <div
         style={{
           display: 'flex',

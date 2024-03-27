@@ -1,0 +1,36 @@
+/* ProgressBar.css*/
+.container-progress{
+    position:sticky;
+    top: 2px;
+    left: 1px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      margin:20px 0;
+  }
+  .progress-bar-container {
+   
+      width: 100vh; /* Largeur de la barre de progression */
+      height: 30px; /* Hauteur de la barre de progression */
+      background-color: #f5f5f5; /* Couleur de fond */
+      border-radius: 5px; /* Coins arrondis */
+    }
+    
+    .progress-bar {
+      height: 100%; /* Hauteur de la barre de progression */
+      background-color: #81da79; /* Couleur de remplissage */
+      border-radius: 5px; /* Coins arrondis */
+    }
+    
+    .progress-bar.red {
+      background-color: rgba(255, 0, 0, 0.712);
+  }
+  
+  .progress-bar.orange {
+      background-color: rgb(247, 138, 36);
+  }
+  
+  .progress-bar.green {
+      background-color: rgb(104, 182, 104);
+  }
+  
