@@ -1,70 +1,81 @@
 import { Link, useParams } from "react-router-dom";
 import { useState } from "react";
 import { books } from "../data/books";
-import ProgressBar from './ProgressBar/ProgressBar';
+import ProgressBar from "./ProgressBar/ProgressBar";
 
 export default function BookDetails() {
-  const { slug } = useParams()
-  const book = books.find(item => item.id == slug)
-  const chapters = Array.from({ length: book.chapter }, (value, idx) => idx + 1)
-  const localStorageKey = book.title
+  const { slug } = useParams();
+  const book = books.find((item) => item.id == slug);
+  const chapters = Array.from(
+    { length: book.chapter },
+    (value, idx) => idx + 1
+  );
+  const localStorageKey = book.title;
 
-  const [selecteds, setSelecteds] = useState(localStorage.hasOwnProperty(localStorageKey) ? JSON.parse(localStorage.getItem(localStorageKey)) : [])
+  const [selecteds, setSelecteds] = useState(
+    localStorage.hasOwnProperty(localStorageKey)
+      ? JSON.parse(localStorage.getItem(localStorageKey))
+      : []
+  );
   const COLORS = {
-    selected: 'rgb(254 245 231)',
-  }
+    selected: "rgb(254 245 231)",
+  };
 
   const handleClick = (chap) => {
-
     if (selecteds.includes(chap)) {
-      const myChaps = selecteds.filter(el => el !== chap)
-      setSelecteds(myChaps)
-      localStorage.setItem(localStorageKey, JSON.stringify(myChaps))
+      const myChaps = selecteds.filter((el) => el !== chap);
+      setSelecteds(myChaps);
+      localStorage.setItem(localStorageKey, JSON.stringify(myChaps));
+    } else {
+      setSelecteds((prev) => [...prev, chap]);
+      localStorage.setItem(
+        localStorageKey,
+        JSON.stringify([...selecteds, chap])
+      );
     }
+  };
 
-    else {
-      setSelecteds(prev => [...prev, chap])
-      localStorage.setItem(localStorageKey, JSON.stringify([...selecteds, chap]))
-    }
+  const progressionLecture = Math.round(
+    (selecteds.length / book.chapter) * 100
+  );
 
-  }
-    const progressionLecture = Math.round((selecteds.length / book.chapter) * 100);
   return (
     <>
       <Link to="/">Retour</Link>
       <h2>{book.title}</h2>
-      <div className="container-progress">     
-      <ProgressBar percentage={progressionLecture} className="my-custom-class" />
+      <div className="container-progress">
+        <p>{progressionLecture}%</p>
+        <ProgressBar percentage={progressionLecture} />
       </div>
       <div
         style={{
-          display: 'flex',
-          flexWrap: 'wrap',
-          gap: '25px',
+          display: "flex",
+          flexWrap: "wrap",
+          gap: "25px",
         }}
       >
-        {
-          chapters.map((chap, idx) => {
-            return (
-              <div
-                style={{
-                  borderRadius: '.25rem',
-                  boxShadow: '0 1px 7px #999',
-                  padding: '2em',
-                  height: '5em',
-                  width: '5em',
-                  backgroundColor: selecteds.includes(chap) ? COLORS.selected : '',
-                  cursor: 'pointer'
-                }}
-                onClick={ () => handleClick(chap) }
-                key={( idx + 1).toString() }
-              >
-                {chap}
-              </div>)
-          }
-          )
-        }
+        {chapters.map((chap, idx) => {
+          return (
+            <div
+              style={{
+                borderRadius: ".25rem",
+                boxShadow: "0 1px 7px #999",
+                padding: "2em",
+                height: "5em",
+                width: "5em",
+                backgroundColor: selecteds.includes(chap)
+                  ? COLORS.selected
+                  : "",
+                cursor: "pointer",
+              }}
+              onClick={() => handleClick(chap)}
+              key={(idx + 1).toString()}
+            >
+              {chap}
+            </div>
+          );
+        })}
       </div>
     </>
-  )
+  );
 }
