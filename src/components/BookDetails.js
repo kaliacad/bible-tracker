@@ -52,6 +52,7 @@ export default function BookDetails() {
           display: "flex",
           flexWrap: "wrap",
           gap: "25px",
+    
         }}
       >
         {chapters.map((chap, idx) => {

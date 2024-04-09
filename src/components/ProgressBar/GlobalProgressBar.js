@@ -16,7 +16,7 @@ function GlobalProgressBar() {
       <div className={`progress-bar-container`}>
         <div
           className={`progress-bar segment-read-color`}
-          style={{ width: `${percentage}%` }}
+          style={{ width: `${percentage}%`  }}
         ></div>
       </div>
     </div>
