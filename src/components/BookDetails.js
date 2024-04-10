@@ -1,5 +1,5 @@
 import { Link, useParams } from "react-router-dom";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { books } from "../data/books";
 import ProgressBar from "./ProgressBar/ProgressBar";
 
