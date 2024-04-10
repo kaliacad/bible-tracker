@@ -1,5 +1,5 @@
 import { Link, useParams } from "react-router-dom";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { books } from "../data/books";
 import ProgressBar from "./ProgressBar/ProgressBar";
 
@@ -44,6 +44,12 @@ export default function BookDetails() {
   const progressionLecture = Math.round(
     (selecteds.length / book.chapter) * 100
   );
+
+  const [title, setTitle] = useState(book.title);
+
+  useEffect(() => {
+    document.title = book.title + " | Bible Track";
+  }, [book]);
 
   return (
     <>
