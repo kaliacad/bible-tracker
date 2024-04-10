@@ -35,6 +35,12 @@ export default function BookDetails() {
     }
   };
 
+  const progresBarsTable = new Array(book.chapter).fill("0");
+  const mappedProgresBarsTable = progresBarsTable.map((chap, index) =>{
+    if(selecteds.includes(index+1)) return chap="1" 
+    else return chap
+  })
+
   const progressionLecture = Math.round(
     (selecteds.length / book.chapter) * 100
   );
@@ -45,7 +51,7 @@ export default function BookDetails() {
       <h2>{book.title}</h2>
       <div className="container-progress">
         <p>{progressionLecture}%</p>
-        <ProgressBar percentage={progressionLecture} />
+        <ProgressBar percentage={mappedProgresBarsTable} />
       </div>
       <div
         style={{

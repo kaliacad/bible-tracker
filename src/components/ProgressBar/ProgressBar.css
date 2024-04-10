@@ -22,7 +22,20 @@
 }
 
 .progress-bar {
+  display: flex;
   height: 100%;
-  background-color: #81da79;
+  overflow: hidden;
   border-radius: 5px;
+}
+
+.progress-bar>span {
+  height: 100%;
+  
+  flex-grow: 2;
+}
+.span-true{
+  background-color: #09F;
+}
+.span-true2{
+  background-color: #da7f79;
 }
