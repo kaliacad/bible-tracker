@@ -4,7 +4,21 @@ import GlobalProgressBar from "./ProgressBar/GlobalProgressBar";
 
 export default function BookList() {
   const listItems = books.map((book) => (
-    <Link to={`/books/${book.id}`} key={book.id.toString()}>
+    <div style={ {
+      display:"flex",
+      flexDirection:"column",
+      alignItems:"center"
+    }}>
+
+
+  
+
+    <Link to={`/books/${book.id}`} style={{
+      textDecoration: 'none',
+      color: '#000',
+      width: '50%',
+    }}
+    key={book.id.toString()}>
       <li
         style={{
           listStyleType: "none",
@@ -13,11 +27,13 @@ export default function BookList() {
           boxShadow: "0 1px 7px #999",
           padding: "5px",
           cursor: "pointer",
+          
         }}
       >
         {book.title}
       </li>
     </Link>
+    </div>
   ));
 
   return (
