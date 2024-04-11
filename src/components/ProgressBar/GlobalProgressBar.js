@@ -7,6 +7,7 @@ function GlobalProgressBar() {
       acc + (JSON.parse(localStorage.getItem(bookTitle)) || []).length,
     0
   );
+  console.log("bookTitles", bookTitles)
   const totalChap = books.reduce((acc, book) => acc + book.chapter, 0);
   const percentage = Math.round((chapitresLus * 100) / totalChap);
 
