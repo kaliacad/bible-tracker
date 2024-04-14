@@ -51,9 +51,15 @@ export default function BookDetails() {
     document.title = book.title + " | Bible Track";
   }, [book]);
 
+  const handleRetourClick = () => {
+    document.title = "Bible Track";
+  };
+
   return (
     <>
-      <Link to="/">Retour</Link>
+      <Link to="/" onClick={handleRetourClick}>
+        Retour
+      </Link>
       <h2>{book.title}</h2>
       <div className="container-progress">
         <p>{progressionLecture}%</p>
