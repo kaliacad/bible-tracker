@@ -2,14 +2,23 @@ import { Link, useParams } from "react-router-dom";
 import { useState, useEffect } from "react";
 import { books } from "../data/books";
 import ProgressBar from "./ProgressBar/ProgressBar";
+import NotFoundPage from "./NotFound/NotFoundPage";
 
 export default function BookDetails() {
   const { slug } = useParams();
+
+  const validBookIds = Array.from({ length: 66 }, (_, i) => i + 1);
+  const isValidBookIdPage = validBookIds.includes(parseInt(slug, 10));
+  if (!isValidBookIdPage) {
+    return <NotFoundPage />;
+  }
+
   const book = books.find((item) => item.id == slug);
   const chapters = Array.from(
     { length: book.chapter },
     (value, idx) => idx + 1
   );
+
   const localStorageKey = book.title;
 
   const [selecteds, setSelecteds] = useState(
@@ -36,10 +45,10 @@ export default function BookDetails() {
   };
 
   const progresBarsTable = new Array(book.chapter).fill("0");
-  const mappedProgresBarsTable = progresBarsTable.map((chap, index) =>{
-    if(selecteds.includes(index+1)) return chap="1" 
-    else return chap
-  })
+  const mappedProgresBarsTable = progresBarsTable.map((chap, index) => {
+    if (selecteds.includes(index + 1)) return (chap = "1");
+    else return chap;
+  });
 
   const progressionLecture = Math.round(
     (selecteds.length / book.chapter) * 100
@@ -70,7 +79,6 @@ export default function BookDetails() {
           display: "flex",
           flexWrap: "wrap",
           gap: "25px",
-    
         }}
       >
         {chapters.map((chap, idx) => {
