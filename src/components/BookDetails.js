@@ -36,12 +36,10 @@ export default function BookDetails() {
   };
 
   const progresBarsTable = new Array(book.chapter).fill("0");
-  const mappedProgresBarsTable = progresBarsTable.map((chap, index) =>{
-    if(selecteds.includes(index+1)) return chap="1" 
-    else return chap
-  })
-  console.log(mappedProgresBarsTable)
-
+  const mappedProgresBarsTable = progresBarsTable.map((chap, index) => {
+    if (selecteds.includes(index + 1)) return (chap = "1");
+    else return chap;
+  });
   const progressionLecture = Math.round(
     (selecteds.length / book.chapter) * 100
   );
@@ -71,7 +69,6 @@ export default function BookDetails() {
           display: "flex",
           flexWrap: "wrap",
           gap: "25px",
-    
         }}
       >
         {chapters.map((chap, idx) => {
