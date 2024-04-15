@@ -40,6 +40,7 @@ export default function BookDetails() {
     if(selecteds.includes(index+1)) return chap="1" 
     else return chap
   })
+  console.log(mappedProgresBarsTable)
 
   const progressionLecture = Math.round(
     (selecteds.length / book.chapter) * 100
