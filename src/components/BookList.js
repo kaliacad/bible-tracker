@@ -1,3 +1,4 @@
+
 import { Link } from "react-router-dom";
 import { books } from "../data/books";
 import GlobalProgressBar from "./ProgressBar/GlobalProgressBar";
@@ -62,20 +63,3 @@ export default function BookList() {
       </div>
     );
   });
-
-  return (
-    <>
-      <h2>Liste des livres</h2>
-      <GlobalProgressBar />
-      <ul
-        style={{
-          display: "flex",
-          flexDirection: "column",
-          gap: "7px",
-        }}
-      >
-        {listItems}
-      </ul>
-    </>
-  );
-}
