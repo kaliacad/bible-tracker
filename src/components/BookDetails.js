@@ -1,22 +1,26 @@
 import { Link, useParams } from "react-router-dom";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useMemo } from "react";
 import { books } from "../data/books";
 import ProgressBar from "./ProgressBar/ProgressBar";
+import NotFoundPage from "./NotFound/NotFoundPage";
 
 export default function BookDetails() {
   const { slug } = useParams();
-  const book = books.find((item) => item.id == slug);
-  const chapters = Array.from(
-    { length: book.chapter },
-    (value, idx) => idx + 1
-  );
+
+  const validBookIds = Array.from({ length: 66 }, (_, i) => i + 1);
+  const isValidBookIdPage = validBookIds.includes(parseInt(slug, 10));
+
   const localStorageKey = book.title;
 
-  const [selecteds, setSelecteds] = useState(
-    localStorage.hasOwnProperty(localStorageKey)
+  // Use `useMemo` to memoize the initial state of `selecteds`
+  const initialSelecteds = useMemo(() => {
+    return localStorage.hasOwnProperty(localStorageKey)
       ? JSON.parse(localStorage.getItem(localStorageKey))
-      : []
-  );
+      : [];
+  }, [localStorageKey]);
+
+  const [selecteds, setSelecteds] = useState(initialSelecteds);
+
   const COLORS = {
     selected: "rgb(254 245 231)",
   };
@@ -36,16 +40,19 @@ export default function BookDetails() {
   };
 
   const progresBarsTable = new Array(book.chapter).fill("0");
-  const mappedProgresBarsTable = progresBarsTable.map((chap, index) =>{
-    if(selecteds.includes(index+1)) return chap="1" 
-    else return chap
-  })
+  const mappedProgresBarsTable = progresBarsTable.map((chap, index) => {
+    if (selecteds.includes(index + 1)) return (chap = "1");
+    else return chap;
+  });
 
   const progressionLecture = Math.round(
     (selecteds.length / book.chapter) * 100
   );
 
-  const [title, setTitle] = useState(book.title);
+  // Use `useMemo` to memoize the initial state of `title` (if needed)
+  const initialTitle = useMemo(() => book.title, [book]);
+
+  const [title, setTitle] = useState(initialTitle);
 
   useEffect(() => {
     document.title = book.title + " | Bible Track";
@@ -54,6 +61,16 @@ export default function BookDetails() {
   const handleRetourClick = () => {
     document.title = "Bible Track";
   };
+
+  if (!isValidBookIdPage) {
+    return <NotFoundPage />;
+  }
+  
+  const book = books.find((item) => item.id == slug);
+  const chapters = Array.from(
+    { length: book.chapter },
+    (value, idx) => idx + 1
+  );
 
   return (
     <>
@@ -70,7 +87,6 @@ export default function BookDetails() {
           display: "flex",
           flexWrap: "wrap",
           gap: "25px",
-    
         }}
       >
         {chapters.map((chap, idx) => {
