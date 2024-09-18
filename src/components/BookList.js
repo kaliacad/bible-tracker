@@ -21,6 +21,7 @@ export default function BookList() {
           flexDirection: "column",
           alignItems: "center",
         }}
+        key={book.id}
       >
         <Link
           to={`/books/${book.id}`}
