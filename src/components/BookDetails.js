@@ -10,7 +10,7 @@ export default function BookDetails() {
   const validBookIds = Array.from({ length: 66 }, (_, i) => i + 1);
   const isValidBookIdPage = validBookIds.includes(parseInt(slug, 10));
 
-  const localStorageKey = book.title;
+  const localStorageKey = book.title || "";
 
   // Use `useMemo` to memoize the initial state of `selecteds`
   const initialSelecteds = useMemo(() => {

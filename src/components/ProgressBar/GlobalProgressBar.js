@@ -7,12 +7,9 @@ function GlobalProgressBar() {
       acc + (JSON.parse(localStorage.getItem(bookTitle)) || []).length,
     0
   );
-  console.log("bookTitles", bookTitles);
   const totalChap = books.reduce((acc, book) => acc + book.chapter, 0);
   const percentage = Math.round((chapitresLus * 100) / totalChap);
-  console.log("TatalChapters", totalChap);
   const bookChap = books.map((book) => book.chapter);
-  console.log("bookChap", bookChap);
 
   return (
     <div className="container-progress">
@@ -26,8 +23,6 @@ function GlobalProgressBar() {
           const readChapters = JSON.parse(localStorage.getItem(book.title)) || [];
           const bookPercentage = Math.round((readChapters.length * 100) / book.chapter);
           
-          console.log(`Read chapters for ${book.title}:`, readChapters);
-
           return (
             <div key={index} className="i-progress-bar-container" style={{ width: `${book.chapter}px` }}>
               <div

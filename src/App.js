@@ -10,7 +10,6 @@ function App() {
     <>
       <Routes>
         <Route path="/" element={<BookList />} />
-
         <Route path="/books/:slug" element={<BookDetails />} />
         <Route path="*" element={<NotFoundPage />} />
       </Routes>
