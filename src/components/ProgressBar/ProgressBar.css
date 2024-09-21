@@ -17,6 +17,31 @@
   /* margin-top: -1em; */
 }
 
+.i-progress-bar-container {
+  width: 80%;
+  height: 1rem;
+  background-color: #000;
+  overflow: hidden;
+  /* margin-top: -1em; */
+}
+
+.i-progress-bar-container:first-child {
+  border-radius: 5px 0px 0px 5px;
+}
+
+.i-progress-bar-container:last-child {
+  border-radius: 0px 5px 5px 0px;
+}
+
+.g-progress-bar-container {
+  height: 1rem;
+  background-color: #000;
+  border-radius: 5px;
+  display: flex;
+  align-items: center;
+  /* margin-top: -1em; */
+}
+
 .segment-read-color {
   background-color: #09f;
 }
@@ -26,6 +51,12 @@
   height: 100%;
   overflow: hidden;
   border-radius: 5px;
+}
+
+.i-progress-bar {
+  display: flex;
+  height: 100%;
+  overflow: hidden;
 }
 
 .progress-bar>span {
