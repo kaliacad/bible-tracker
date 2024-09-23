@@ -9,6 +9,13 @@ export default function BookDetails() {
 
   const validBookIds = Array.from({ length: 66 }, (_, i) => i + 1);
   const isValidBookIdPage = validBookIds.includes(parseInt(slug, 10));
+  if (!isValidBookIdPage) <NotFoundPage />;
+
+  const book = books.find((item) => item.id == slug);
+  const chapters = Array.from(
+    { length: book.chapter },
+    (value, idx) => idx + 1
+  );
 
   const localStorageKey = book.title;
 
@@ -62,15 +69,9 @@ export default function BookDetails() {
     document.title = "Bible Track";
   };
 
-  if (!isValidBookIdPage) {
-    return <NotFoundPage />;
-  }
   
-  const book = books.find((item) => item.id == slug);
-  const chapters = Array.from(
-    { length: book.chapter },
-    (value, idx) => idx + 1
-  );
+  
+  
 
   return (
     <>
