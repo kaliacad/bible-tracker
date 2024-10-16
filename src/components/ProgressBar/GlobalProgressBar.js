@@ -1,4 +1,5 @@
 import { books } from "../../data/books";
+import ProgressBar from "./ProgressBar";
 
 function GlobalProgressBar() {
   const bookTitles = books.map((book) => book.title);
@@ -11,28 +12,20 @@ function GlobalProgressBar() {
   const percentage = Math.round((chapitresLus * 100) / totalChap);
   const bookChap = books.map((book) => book.chapter);
 
+  const progresBarsTable = [];
+  books.forEach((book) => {
+    const readChapters = JSON.parse(localStorage.getItem(book.title)) || [];
+    const chapters = new Array(book.chapter).fill("0");
+    chapters.forEach((_, index) => {
+      if (readChapters.includes(index)) progresBarsTable.push("1");
+      else progresBarsTable.push("0");
+    });
+  });
   return (
     <div className="container-progress">
       <p>{percentage}%</p>
-
-      {/* Main container width based on total chapters */}
-      <div className="g-progress-bar-container" style={{ width: `${totalChap}px`, height: "1px" }}>
-        
-        {/* Use map() to iterate over books and generate progress bars */}
-        {books.map((book, index) => {
-          const readChapters = JSON.parse(localStorage.getItem(book.title)) || [];
-          const bookPercentage = Math.round((readChapters.length * 100) / book.chapter);
-          
-          return (
-            <div key={index} className="i-progress-bar-container" style={{ width: `${book.chapter}px` }}>
-              <div
-                className="i-progress-bar segment-read-color"
-                style={{ width: `${bookPercentage}%` }}
-              ></div>
-            </div>
-          );
-        })}
-      </div>
+      {/* Use map() to iterate over books and generate progress bars */}
+      <ProgressBar percentage={progresBarsTable} />
     </div>
   );
 }
